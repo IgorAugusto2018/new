@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Controle de Compras</string>
+    <string name="title_activity_lista">Lista</string>
+</resources>
