@@ -4,4 +4,8 @@
 
     <item android:title="Excluir"
           android:onClick="excluir"/>
+    <item
+        android:icon="@android:drawable/checkbox_on_background"
+        android:title="Já comprado"
+        android:onClick="baixa"/>
 </menu>

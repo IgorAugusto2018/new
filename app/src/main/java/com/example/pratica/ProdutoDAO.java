@@ -22,6 +22,7 @@ public class ProdutoDAO {
 
         values.put("nome", produto.getNome());
         return banco.insert("lista",null, values);
+
     }
     public List<Produto> ObterTodos(){
         List<Produto> produtos = new ArrayList<>();
@@ -38,7 +39,7 @@ public class ProdutoDAO {
         }
         return produtos;
     }
-    public void excluir(Produto produto) {
-        banco.delete("aluno", "id = ?", new String[]{produto.getId().toString()});
+    public void excluir(Produto p) {
+        banco.delete("lista", "id = ?", new String[]{p.getId().toString()});
     }
 }

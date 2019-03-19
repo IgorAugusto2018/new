@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         p.setNome(nome.getText().toString());
         long id = dao.inserir(p);
 
-          Toast.makeText(MainActivity.this, +id+" inserido",Toast.LENGTH_LONG).show();
+          Toast.makeText(MainActivity.this, " inserido com sucesso!!!",Toast.LENGTH_LONG).show();
 
         Intent it = new Intent(MainActivity.this, Lista.class);
         startActivity(it);

@@ -3,11 +3,10 @@ package com.example.pratica;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -15,8 +14,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SearchView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,12 +30,16 @@ public class Lista extends AppCompatActivity {
     private List<Produto> produtos;
     private List<Produto> produtosFiltrados = new ArrayList<>();
 
+
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -48,13 +54,22 @@ public class Lista extends AppCompatActivity {
 
 
             listaView = findViewById(R.id.lista);
+
+
             dao = new ProdutoDAO(this);
+
             produtos = dao.ObterTodos();
             produtosFiltrados.addAll(produtos);
             ArrayAdapter<Produto> adapter = new ArrayAdapter<Produto>(this, android.R.layout.simple_list_item_1, produtosFiltrados);
             listaView.setAdapter(adapter);
 
+
+        View listaViewFechado = findViewById(R.id.lista_fechada);
+
             registerForContextMenu(listaView);
+
+
+
 
     }
 
@@ -118,6 +133,22 @@ public class Lista extends AppCompatActivity {
         dialog.show();
     }
 
+    public void baixa(MenuItem item){
+        AdapterView.AdapterContextMenuInfo menuInfo =
+                (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+
+
+        final Produto produtoExcluir = produtosFiltrados.get(menuInfo.position);
+
+
+
+
+        Toast.makeText(this, produtoExcluir+" Retirado da lista", Toast.LENGTH_LONG).show();
+
+
+
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -125,6 +156,8 @@ public class Lista extends AppCompatActivity {
         produtosFiltrados.clear();
         produtosFiltrados.addAll(produtos);
         listaView.invalidateViews();
+
+
     }
 
     public void lista(MenuItem item) {
